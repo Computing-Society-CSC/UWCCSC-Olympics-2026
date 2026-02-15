@@ -90,10 +90,45 @@ def calculate_points(category, position, house_id):
 
 # ============= 公开路由 =============
 @app.route('/')
-@app.route('/home')
+@app.route('/home/')
 def home():
-    events = list(events_collection.find().sort('status', -1))
-    return render_template('all_matches.html', matches=events, route='home')
+    # 获取所有学院排名
+    houses = list(houses_collection.find().sort('points', -1))
+    house_rankings = []
+    color_map = {}
+    for idx, house in enumerate(houses):
+        house_rankings.append({
+            'rank': idx + 1,
+            'name': house['name'],
+            'points': house['points']
+        })
+        color_map[house['name']] = house['color']
+    
+    # 获取所有比赛
+    all_matches = list(events_collection.find())
+    
+    # 为每个比赛添加胜者名称
+    for match in all_matches:
+        if match.get('manual_1st_player_id'):
+            winner = players_collection.find_one({'_id': match['manual_1st_player_id']})
+            match['winner_name'] = winner['name'] if winner else None
+    
+    # 分类比赛
+    ongoing_matches = [m for m in all_matches if m.get('status') == 1]
+    upcoming_matches = [m for m in all_matches if m.get('status') == 0]
+    completed_matches = [m for m in all_matches if m.get('status') == 2]
+    
+    # 今日比赛（假设今天日期是2026-03-15）
+    today = "2026-03-15"
+    today_events = [m for m in all_matches if today in m.get('start_time', '')]
+    
+    return render_template('home.html',
+                         house_rankings=house_rankings,
+                         color_map=color_map,
+                         ongoing_matches=ongoing_matches[:6],  # 只显示前6个
+                         upcoming_matches=upcoming_matches[:6],
+                         completed_matches=completed_matches[:6],
+                         today_events=today_events[:5])
 
 @app.route('/about/')
 def about():
