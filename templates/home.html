@@ -1,4 +1,3 @@
-<!-- templates/home.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +12,6 @@
         }
 
         :root {
-            /* 从Ikhaya页面提取的颜色 */
             --uwc-blue: #1a4b6d;
             --uwc-green: #2a7a62;
             --text-dark: #333333;
@@ -32,7 +30,7 @@
             line-height: 1.6;
         }
 
-        /* 导航栏 - 绿色背景，保留原有结构 */
+        /* 导航栏 */
         .nav {
             background-color: var(--uwc-green);
             position: sticky;
@@ -56,12 +54,12 @@
             gap: 1rem;
             text-decoration: none;
             color: white;
-            font-weight: 600;
-            font-size: 1.3rem;
+            font-weight: 800;
+            font-size: 1.7rem;
         }
 
         .logo img {
-            height: 40px;
+            height: 48px;  /* 从40px改为48px，稍微大一点 */
             width: auto;
             border-radius: 6px;
         }
@@ -91,53 +89,23 @@
             font-weight: 600;
         }
 
-        /* 主容器 - 保持原有布局 */
+        /* 主容器 */
         .container {
             max-width: 1280px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
 
-        /* 欢迎区域 - 只改颜色 */
-        .welcome {
-            margin-bottom: 3rem;
-            padding: 2rem 0;
-        }
-
-        .welcome h1 {
-            font-size: 3rem;
-            font-weight: 600;
-            color: var(--uwc-blue);
-            letter-spacing: -0.02em;
-            margin-bottom: 0.5rem;
-        }
-
-        .welcome .subhead {
-            font-size: 1.2rem;
-            color: var(--text-light);
-            max-width: 600px;
-        }
-
-        .date-badge {
-            display: inline-block;
-            background: var(--uwc-green);
-            color: white;
-            padding: 0.25rem 1rem;
-            border-radius: 30px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-top: 1rem;
-        }
-        /* 欢迎区域 - 背景图片版本 */
-        .welcome-with-bg {
-            background-image: url('/static/UWC_flags.jpg');
-            background-size: cover;
-            background-position: center;
+        /* 欢迎区域 - 带背景图片 */
+        .welcome-section {
             position: relative;
             padding: 3rem 2rem;
             border-radius: 24px;
             margin-bottom: 3rem;
             overflow: hidden;
+            background-image: url('/static/UWC_flags.jpg');
+            background-size: cover;
+            background-position: center;
         }
 
         .welcome-overlay {
@@ -155,17 +123,47 @@
             z-index: 2;
             display: flex;
             align-items: center;
+            justify-content: space-between;
             gap: 2rem;
         }
 
-        .welcome-logo {
-            height: 80px;
-            width: auto;
-            object-fit: contain;
+        .welcome-text {
+            flex: 1;
         }
 
-        
-        /* 前三名学院 - 保持领奖台布局，只改颜色 */
+        .welcome-text h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--uwc-blue);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .welcome-subhead {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        .welcome-badge {
+            display: inline-block;
+            background: var(--uwc-green);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .welcome-logo {
+            height: 160px;
+            width: auto;
+            object-fit: contain;
+            margin-left: 2rem;
+        }
+
+        /* 前三名学院 */
         .section-title {
             font-size: 1.5rem;
             font-weight: 600;
@@ -238,7 +236,7 @@
             display: inline-block;
         }
 
-        /* 当天赛程 - 保持卡片布局 */
+        /* 当天赛程 */
         .today-schedule {
             background: var(--card-white);
             border-radius: var(--border-radius-card);
@@ -253,6 +251,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
         }
 
         .schedule-header h2 {
@@ -325,7 +325,7 @@
             font-style: italic;
         }
 
-        /* 导航卡片 - 三个链接，保持原有风格但用新颜色 */
+        /* 导航卡片 - 已移除，保留样式以防万一 */
         .nav-cards {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -363,7 +363,7 @@
             line-height: 1.5;
         }
 
-        /* 页脚 - 只改颜色 */
+        /* 页脚 */
         .footer {
             margin-top: 4rem;
             padding: 2rem;
@@ -381,10 +381,18 @@
         .footer .uwc-link:hover {
             text-decoration: underline;
         }
-        
 
-        /* 响应式调整 */
+        /* 响应式 */
         @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
             .welcome-content {
                 flex-direction: column;
                 text-align: center;
@@ -392,22 +400,44 @@
             }
             
             .welcome-logo {
-                height: 60px;
+                height: 100px;
+                margin-left: 0;
+                margin-top: 1rem;
             }
             
-            .welcome-content h1 {
+            .welcome-text h1 {
                 font-size: 2rem;
             }
+            
+            .podium {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .nav-cards {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .schedule-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
-
     </style>
 </head>
 <body>
-    <!-- 导航栏 - 绿色背景，完全保留 -->
+    <!-- 导航栏 - 使用logo2.jpg -->
     <nav class="nav">
         <div class="nav-container">
-            <a href="/" class="logo">
-                <img src="Olympics/UWCCSC-Olympics-2026/static/UWC_LOGO.png" alt="UWC Logo">
+            <a href=" " class="logo">
+                <img src="/static/logo2.jpg" alt="CSC Olympics Logo" onerror="this.style.display='none'">
                 <span>UWC CSC Olympics 2026</span>
             </a>
             <div class="nav-links">
@@ -420,26 +450,23 @@
     </nav>
 
     <div class="container">
-        <!-- 欢迎区域 - 带背景图片和Logo -->
-        <div class="welcome" style="background-image: url('Olympics/UWCCSC-Olympics-2026/static/UWC_flags.jpg'); background-size: cover; background-position: center; position: relative; padding: 3rem 2rem; border-radius: 24px; margin-bottom: 3rem; overflow: hidden;">
-            <!-- 半透明遮罩，让文字更清晰 -->
-            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.85); z-index: 1;"></div>
-            
-            <!-- 内容区域，放在遮罩上层 -->
-            <div style="position: relative; z-index: 2; display: flex; align-items: center; gap: 2rem;">
-                <!-- UWC LOGO 放在左边 -->
-                <img src="Olympics/UWCCSC-Olympics-2026/static/UWC_LOGO.png" alt="UWC Logo" style="height: 80px; width: auto; object-fit: contain;">
-                
-                <!-- 文字内容 -->
-                <div>
-                    <h1 style="font-size: 3rem; font-weight: 600; color: var(--uwc-blue); letter-spacing: -0.02em; margin-bottom: 0.5rem;">United by competition,<br>inspired by each other</h1>
-                    <div class="subhead" style="font-size: 1.2rem; color: var(--text-light);">March 14–16, 2026 · UWC Changshu</div>
-                    <div class="date-badge" style="display: inline-block; background: var(--uwc-green); color: white; padding: 0.25rem 1rem; border-radius: 30px; font-size: 0.9rem; font-weight: 500; margin-top: 1rem;">12 houses · 15 events · 120+ athletes</div>
+        <!-- 欢迎区域 - 使用UWC_LOGO.png在右边 -->
+        <div class="welcome-section">
+            <div class="welcome-overlay"></div>
+            <div class="welcome-content">
+                <!-- 文字内容在左边 -->
+                <div class="welcome-text">
+                    <h1>United by competition,<br>inspired by each other</h1>
+                    <div class="welcome-subhead">March 14–16, 2026 · UWC Changshu</div>
+                    <div class="welcome-badge">12 houses · 15 events · 120+ athletes</div>
                 </div>
+                
+                <!-- UWC LOGO 放在右边，使用UWC_LOGO.png文件 -->
+                <img src="/static/UWC_LOGO.png" alt="UWC Changshu China Logo" class="welcome-logo" onerror="this.style.display='none'">
             </div>
         </div>
 
-        <!-- 前三名学院 - 布局完全不变，只改颜色 -->
+        <!-- 前三名学院 -->
         <div class="section-title">🏆 House standings · top 3</div>
         <div class="podium">
             {% for house in top_3_houses %}
@@ -457,11 +484,11 @@
             {% endfor %}
         </div>
 
-        <!-- 当天赛程 - 布局完全不变 -->
+        <!-- 当天赛程 -->
         <div class="today-schedule">
             <div class="schedule-header">
-                <h2>Today's schedule</h2>
-                <div class="schedule-date">{{ today_date }}</div>
+                <h2>📅 Today's schedule</h2>
+                <div class="schedule-date">{{ today_date or 'March 15, 2026' }}</div>
             </div>
 
             <div class="schedule-grid">
@@ -480,10 +507,9 @@
                 {% endif %}
             </div>
         </div>
+    </div>
 
-       
-
-    <!-- 页脚 - 只改颜色 -->
+    <!-- 页脚 -->
     <footer class="footer">
         <p>© 2026 CSC Olympics · UWC Changshu China</p>
         <p style="margin-top: 0.5rem;">Made by <a href="#" class="uwc-link">Computing Society</a></p>
