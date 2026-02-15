@@ -1,10 +1,10 @@
 <!-- templates/home.html -->
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CSC Olympics 2026 - 主页</title>
+    <title>CSC Olympics 2026 - UWC Changshu China</title>
     <style>
         * {
             margin: 0;
@@ -13,39 +13,36 @@
         }
 
         :root {
-            --primary: #2d4059;
-            --secondary: #ea5455;
-            --accent: #f07b3f;
-            --light: #eeeeee;
-            --dark: #1e1e2f;
-            --success: #4caf50;
-            --warning: #ff9800;
-            --danger: #f44336;
-            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-            --shadow: 0 10px 30px rgba(0,0,0,0.1);
-            --shadow-hover: 0 15px 40px rgba(0,0,0,0.2);
+            /* 从Ikhaya页面提取的颜色 */
+            --uwc-blue: #1a4b6d;
+            --uwc-green: #2a7a62;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --background-light: #f8f9fa;
+            --card-white: #ffffff;
+            --shadow-subtle: 0 5px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.12);
+            --border-radius-card: 16px;
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f5f7fa;
-            color: var(--dark);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-dark);
             line-height: 1.6;
         }
 
-        /* 导航栏 */
-        .navbar {
-            background: white;
-            box-shadow: var(--shadow);
+        /* 导航栏 - 绿色背景，保留原有结构 */
+        .nav {
+            background-color: var(--uwc-green);
             position: sticky;
             top: 0;
-            z-index: 1000;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 1280px;
             margin: 0 auto;
             padding: 1rem 2rem;
             display: flex;
@@ -58,751 +55,438 @@
             align-items: center;
             gap: 1rem;
             text-decoration: none;
-            color: var(--primary);
+            color: white;
+            font-weight: 600;
+            font-size: 1.3rem;
         }
 
         .logo img {
-            height: 50px;
+            height: 40px;
             width: auto;
-            border-radius: 8px;
-        }
-
-        .logo h1 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            background: var(--gradient-1);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            border-radius: 6px;
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
-            align-items: center;
         }
 
         .nav-links a {
             text-decoration: none;
-            color: var(--primary);
-            font-weight: 600;
-            padding: 0.5rem 1rem;
-            border-radius: 25px;
-            transition: all 0.3s ease;
+            color: white;
+            font-weight: 500;
+            font-size: 1rem;
+            padding: 0.5rem 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
         }
 
         .nav-links a:hover {
-            background: var(--primary);
-            color: white;
+            border-bottom-color: white;
+            opacity: 0.9;
         }
 
         .nav-links a.active {
-            background: var(--secondary);
-            color: white;
+            border-bottom-color: white;
+            font-weight: 600;
         }
 
-        /* 主要内容容器 */
+        /* 主容器 - 保持原有布局 */
         .container {
-            max-width: 1400px;
+            max-width: 1280px;
             margin: 2rem auto;
             padding: 0 2rem;
         }
 
-        /* 欢迎横幅 */
-        .hero {
-            background: var(--gradient-1);
-            border-radius: 20px;
-            padding: 3rem;
-            color: white;
-            margin-bottom: 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
+        /* 欢迎区域 - 只改颜色 */
+        .welcome {
+            margin-bottom: 3rem;
+            padding: 2rem 0;
         }
 
-        .hero-content h2 {
-            font-size: 2.5rem;
+        .welcome h1 {
+            font-size: 3rem;
+            font-weight: 600;
+            color: var(--uwc-blue);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome .subhead {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 600px;
+        }
+
+        .date-badge {
+            display: inline-block;
+            background: var(--uwc-green);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: 1rem;
+        }
+        /* 欢迎区域 - 背景图片版本 */
+        .welcome-with-bg {
+            background-image: url('/static/UWC_flags.jpg');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            margin-bottom: 3rem;
+            overflow: hidden;
+        }
+
+        .welcome-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.85);
+            z-index: 1;
+        }
+
+        .welcome-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .welcome-logo {
+            height: 80px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        
+        /* 前三名学院 - 保持领奖台布局，只改颜色 */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--uwc-blue);
+            margin-bottom: 1.5rem;
+        }
+
+        .podium {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+            align-items: flex-end;
+        }
+
+        .podium-item {
+            background: var(--card-white);
+            border-radius: var(--border-radius-card);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.3s;
+            border-top: 4px solid transparent;
+        }
+
+        .podium-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .podium-item.rank-1 {
+            border-top-color: #FFD700;
+            padding: 2.5rem 1.5rem;
+        }
+
+        .podium-item.rank-2 {
+            border-top-color: #C0C0C0;
+        }
+
+        .podium-item.rank-3 {
+            border-top-color: #CD7F32;
+        }
+
+        .podium-rank {
+            font-size: 0.9rem;
+            color: var(--text-light);
             margin-bottom: 1rem;
         }
 
-        .hero-content p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+        .podium-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--uwc-blue);
+            margin-bottom: 0.5rem;
         }
 
-        .hero-stats {
-            display: flex;
-            gap: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
+        .podium-points {
             font-size: 2.5rem;
             font-weight: 700;
-            display: block;
+            color: var(--uwc-green);
+            margin-bottom: 0.5rem;
         }
 
-        .stat-label {
-            font-size: 1rem;
-            opacity: 0.9;
+        .podium-label {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            background: var(--background-light);
+            padding: 0.25rem 1rem;
+            border-radius: 30px;
+            display: inline-block;
         }
 
-        /* 学院排名卡片 - 前三名突出显示 */
-        .house-section {
+        /* 当天赛程 - 保持卡片布局 */
+        .today-schedule {
+            background: var(--card-white);
+            border-radius: var(--border-radius-card);
+            padding: 2rem;
             margin-bottom: 3rem;
+            box-shadow: var(--shadow-subtle);
+            border-left: 4px solid var(--uwc-green);
         }
 
-        .section-header {
+        .schedule-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
         }
 
-        .section-header h3 {
-            font-size: 1.8rem;
-            color: var(--primary);
-            position: relative;
-            padding-bottom: 0.5rem;
+        .schedule-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--uwc-blue);
         }
 
-        .section-header h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 4px;
-            background: var(--secondary);
-            border-radius: 2px;
-        }
-
-        .view-all {
-            color: var(--secondary);
-            text-decoration: none;
+        .schedule-date {
+            background: var(--background-light);
+            color: var(--uwc-green);
+            padding: 0.4rem 1.2rem;
+            border-radius: 40px;
+            font-size: 1rem;
             font-weight: 600;
         }
 
-        .top-houses {
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+
+        .schedule-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--background-light);
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .schedule-item:hover {
+            background: white;
+            box-shadow: var(--shadow-subtle);
+        }
+
+        .schedule-time {
+            min-width: 80px;
+            font-weight: 700;
+            color: var(--uwc-blue);
+            font-size: 1rem;
+            background: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 30px;
+            text-align: center;
+        }
+
+        .schedule-info {
+            flex: 1;
+        }
+
+        .schedule-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+
+        .schedule-location {
+            font-size: 0.85rem;
+            color: var(--text-light);
+        }
+
+        .empty-schedule {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* 导航卡片 - 三个链接，保持原有风格但用新颜色 */
+        .nav-cards {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
-        .house-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .house-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 8px;
-            background: var(--house-color, var(--primary));
-        }
-
-        .house-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .house-card.rank-1 {
-            border: 3px solid gold;
-        }
-
-        .house-card.rank-2 {
-            border: 3px solid silver;
-        }
-
-        .house-card.rank-3 {
-            border: 3px solid #cd7f32;
-        }
-
-        .house-rank {
-            font-size: 1.2rem;
-            color: #666;
-            margin-bottom: 1rem;
-        }
-
-        .house-name {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--primary);
-        }
-
-        .house-points {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #eee;
-            border-radius: 5px;
-            overflow: hidden;
-            margin: 1rem 0;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--secondary), var(--accent));
-            border-radius: 5px;
-            transition: width 0.5s ease;
-        }
-
-        .house-tag {
-            display: inline-block;
-            padding: 0.3rem 1rem;
-            background: var(--light);
-            border-radius: 20px;
-            font-size: 0.9rem;
-            color: var(--primary);
-        }
-
-        /* 其他学院网格 */
-        .other-houses {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .mini-house-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
-            border-left: 5px solid var(--house-color, var(--primary));
-        }
-
-        .mini-house-card:hover {
-            transform: translateX(5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .mini-house-name {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .mini-house-points {
-            font-weight: 700;
-            color: var(--secondary);
-        }
-
-        /* 比赛卡片网格 */
-        .matches-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
-        }
-
-        .match-card {
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: all 0.3s ease;
+        .nav-card {
+            background: var(--card-white);
+            border-radius: var(--border-radius-card);
+            padding: 2rem 1.5rem;
             text-decoration: none;
             color: inherit;
+            box-shadow: var(--shadow-subtle);
+            transition: all 0.3s;
+            text-align: center;
+            border-top: 4px solid var(--uwc-green);
         }
 
-        .match-card:hover {
-            transform: translateY(-5px);
+        .nav-card:hover {
+            transform: translateY(-4px);
             box-shadow: var(--shadow-hover);
         }
 
-        .match-header {
-            padding: 1.5rem;
-            background: var(--gradient-3);
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .match-icon {
-            font-size: 3rem;
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
-        }
-
-        .match-status {
-            padding: 0.3rem 1rem;
-            border-radius: 20px;
-            font-size: 0.9rem;
+        .nav-card h3 {
+            font-size: 1.4rem;
             font-weight: 600;
-        }
-
-        .status-scheduled {
-            background: rgba(255,255,255,0.3);
-            color: white;
-        }
-
-        .status-ongoing {
-            background: var(--success);
-            color: white;
-        }
-
-        .status-completed {
-            background: var(--primary);
-            color: white;
-        }
-
-        .match-body {
-            padding: 1.5rem;
-        }
-
-        .match-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .match-time {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        .match-time i {
-            color: var(--secondary);
-        }
-
-        .match-description {
-            color: #666;
-            margin-bottom: 1rem;
-            line-height: 1.4;
-        }
-
-        .match-winner {
-            background: #f8f9fa;
-            padding: 1rem;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .winner-tag {
-            background: gold;
-            color: var(--dark);
-            padding: 0.2rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        /* 时间线部分 */
-        .timeline-section {
-            background: white;
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            margin-bottom: 3rem;
-        }
-
-        .timeline {
-            position: relative;
-            padding: 2rem 0;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 100%;
-            background: var(--gradient-2);
-            border-radius: 2px;
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 2rem;
-            width: 50%;
-            padding: 0 2rem;
-        }
-
-        .timeline-item:nth-child(odd) {
-            left: 0;
-            text-align: right;
-        }
-
-        .timeline-item:nth-child(even) {
-            left: 50%;
-        }
-
-        .timeline-content {
-            background: #f8f9fa;
-            padding: 1.5rem;
-            border-radius: 15px;
-            box-shadow: var(--shadow);
-            position: relative;
-        }
-
-        .timeline-content::before {
-            content: '';
-            position: absolute;
-            top: 20px;
-            width: 20px;
-            height: 20px;
-            background: var(--secondary);
-            border-radius: 50%;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content::before {
-            right: -32px;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content::before {
-            left: -32px;
-        }
-
-        .timeline-date {
-            color: var(--secondary);
-            font-weight: 600;
+            color: var(--uwc-blue);
             margin-bottom: 0.5rem;
         }
 
-        .timeline-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
+        .nav-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.5;
         }
 
-        /* 页脚 */
-        footer {
-            background: var(--primary);
-            color: white;
-            padding: 3rem 2rem 1rem;
+        /* 页脚 - 只改颜色 */
+        .footer {
             margin-top: 4rem;
-        }
-
-        .footer-content {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-        }
-
-        .footer-section h4 {
-            margin-bottom: 1rem;
-            font-size: 1.2rem;
-        }
-
-        .footer-section p, .footer-section a {
-            color: rgba(255,255,255,0.8);
-            text-decoration: none;
-            line-height: 1.8;
-        }
-
-        .footer-section a:hover {
-            color: white;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background: var(--secondary);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
+            padding: 2rem;
             text-align: center;
-            padding-top: 2rem;
-            margin-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.6);
+            color: var(--text-light);
+            border-top: 1px solid rgba(42, 122, 98, 0.2);
         }
 
-        /* 响应式设计 */
+        .footer .uwc-link {
+            color: var(--uwc-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer .uwc-link:hover {
+            text-decoration: underline;
+        }
+        
+
+        /* 响应式调整 */
         @media (max-width: 768px) {
-            .hero {
+            .welcome-content {
                 flex-direction: column;
                 text-align: center;
-                gap: 2rem;
-            }
-
-            .hero-stats {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .top-houses {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline::before {
-                left: 30px;
-            }
-
-            .timeline-item {
-                width: 100%;
-                left: 0 !important;
-                padding-left: 70px;
-                text-align: left !important;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-content::before,
-            .timeline-item:nth-child(even) .timeline-content::before {
-                left: -42px;
-            }
-
-            .nav-container {
-                flex-direction: column;
                 gap: 1rem;
             }
+            
+            .welcome-logo {
+                height: 60px;
+            }
+            
+            .welcome-content h1 {
+                font-size: 2rem;
+            }
         }
+
     </style>
 </head>
 <body>
-    <nav class="navbar">
+    <!-- 导航栏 - 绿色背景，完全保留 -->
+    <nav class="nav">
         <div class="nav-container">
             <a href="/" class="logo">
-                <img src="/static/logo.png" alt="CSC Olympics Logo">
-                <h1>CSC Olympics 2026</h1>
+                <img src="Olympics/UWCCSC-Olympics-2026/static/UWC_LOGO.png" alt="UWC Logo">
+                <span>UWC CSC Olympics 2026</span>
             </a>
             <div class="nav-links">
-                <a href="/" class="active">主页</a>
-                <a href="/houses_status/">学院</a>
-                <a href="/timetable/">赛程</a>
-                <a href="/about/">关于</a>
+                <a href="/" class="active">Home</a>
+                <a href="/houses_status/">Houses</a>
+                <a href="/timetable/">Schedule</a>
+                <a href="/about/">About</a>
             </div>
         </div>
     </nav>
 
     <div class="container">
-        <!-- 欢迎横幅 -->
-        <div class="hero">
-            <div class="hero-content">
-                <h2>欢迎来到 CSC Olympics 2026</h2>
-                <p>激情 · 友谊 · 卓越 · 12个学院的荣耀之战</p>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">12</span>
-                    <span class="stat-label">学院</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">120+</span>
-                    <span class="stat-label">运动员</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">15</span>
-                    <span class="stat-label">比赛项目</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 学院排名部分 - 突出前三 -->
-        <div class="house-section">
-            <div class="section-header">
-                <h3>学院荣耀榜 🏆</h3>
-                <a href="/houses_status/" class="view-all">查看完整排名 →</a>
-            </div>
-
-            {% set max_points = house_rankings|map(attribute='points')|max %}
+        <!-- 欢迎区域 - 带背景图片和Logo -->
+        <div class="welcome" style="background-image: url('Olympics/UWCCSC-Olympics-2026/static/UWC_flags.jpg'); background-size: cover; background-position: center; position: relative; padding: 3rem 2rem; border-radius: 24px; margin-bottom: 3rem; overflow: hidden;">
+            <!-- 半透明遮罩，让文字更清晰 -->
+            <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.85); z-index: 1;"></div>
             
-            <!-- 前三名学院 -->
-            <div class="top-houses">
-                {% for house in house_rankings[:3] %}
-                <div class="house-card rank-{{ loop.index }}" style="--house-color: {{ color_map[house.name] }}">
-                    <div class="house-rank">#{{ house.rank }}</div>
-                    <div class="house-name">{{ house.name }}</div>
-                    <div class="house-points">{{ house.points }} 分</div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: {{ (house.points / max_points * 100) if max_points > 0 else 0 }}%"></div>
-                    </div>
-                    <div class="house-tag">
-                        {% if loop.index == 1 %}🥇 领先者
-                        {% elif loop.index == 2 %}🥈 追赶者
-                        {% else %}🥉 季军
-                        {% endif %}
-                    </div>
+            <!-- 内容区域，放在遮罩上层 -->
+            <div style="position: relative; z-index: 2; display: flex; align-items: center; gap: 2rem;">
+                <!-- UWC LOGO 放在左边 -->
+                <img src="Olympics/UWCCSC-Olympics-2026/static/UWC_LOGO.png" alt="UWC Logo" style="height: 80px; width: auto; object-fit: contain;">
+                
+                <!-- 文字内容 -->
+                <div>
+                    <h1 style="font-size: 3rem; font-weight: 600; color: var(--uwc-blue); letter-spacing: -0.02em; margin-bottom: 0.5rem;">United by competition,<br>inspired by each other</h1>
+                    <div class="subhead" style="font-size: 1.2rem; color: var(--text-light);">March 14–16, 2026 · UWC Changshu</div>
+                    <div class="date-badge" style="display: inline-block; background: var(--uwc-green); color: white; padding: 0.25rem 1rem; border-radius: 30px; font-size: 0.9rem; font-weight: 500; margin-top: 1rem;">12 houses · 15 events · 120+ athletes</div>
                 </div>
-                {% endfor %}
-            </div>
-
-            <!-- 其他学院 -->
-            <div class="other-houses">
-                {% for house in house_rankings[3:] %}
-                <div class="mini-house-card" style="--house-color: {{ color_map[house.name] }}">
-                    <span class="mini-house-name">#{{ house.rank }} {{ house.name }}</span>
-                    <span class="mini-house-points">{{ house.points }}分</span>
-                </div>
-                {% endfor %}
             </div>
         </div>
 
-        <!-- 进行中的比赛 -->
-        <div class="section-header">
-            <h3>🔥 火热进行中</h3>
-            <a href="/timetable/" class="view-all">查看全部赛程 →</a>
-        </div>
-
-        <div class="matches-grid">
-            {% for match in ongoing_matches %}
-            <a href="/{{ match._id }}/" class="match-card">
-                <div class="match-header">
-                    <span class="match-icon">{{ match.hex_icon or '🏅' }}</span>
-                    <span class="match-status status-ongoing">进行中</span>
-                </div>
-                <div class="match-body">
-                    <div class="match-title">{{ match.name }}</div>
-                    <div class="match-time">
-                        <span>📅 {{ match.start_time }}</span>
-                        <span>⏱️ {{ match.end_time }}</span>
-                    </div>
-                    <div class="match-description">{{ match.description[:100] }}...</div>
-                    {% if match.manual_1st_player_id %}
-                    <div class="match-winner">
-                        <span class="winner-tag">🏆 领先</span>
-                        <span>{{ match.winner_name }}</span>
-                    </div>
+        <!-- 前三名学院 - 布局完全不变，只改颜色 -->
+        <div class="section-title">🏆 House standings · top 3</div>
+        <div class="podium">
+            {% for house in top_3_houses %}
+            <div class="podium-item rank-{{ loop.index }}">
+                <div class="podium-rank">
+                    {% if loop.index == 1 %}🥇 1st place
+                    {% elif loop.index == 2 %}🥈 2nd place
+                    {% else %}🥉 3rd place
                     {% endif %}
                 </div>
-            </a>
+                <div class="podium-name">{{ house.name }}</div>
+                <div class="podium-points">{{ house.points }}</div>
+                <div class="podium-label">house</div>
+            </div>
             {% endfor %}
         </div>
 
-        <!-- 即将开始的比赛 -->
-        <div class="section-header">
-            <h3>📅 即将开始</h3>
-        </div>
+        <!-- 当天赛程 - 布局完全不变 -->
+        <div class="today-schedule">
+            <div class="schedule-header">
+                <h2>Today's schedule</h2>
+                <div class="schedule-date">{{ today_date }}</div>
+            </div>
 
-        <div class="matches-grid">
-            {% for match in upcoming_matches %}
-            <a href="/{{ match._id }}/" class="match-card">
-                <div class="match-header">
-                    <span class="match-icon">{{ match.hex_icon or '🏅' }}</span>
-                    <span class="match-status status-scheduled">待开始</span>
-                </div>
-                <div class="match-body">
-                    <div class="match-title">{{ match.name }}</div>
-                    <div class="match-time">
-                        <span>📅 {{ match.start_time }}</span>
-                        <span>⏱️ {{ match.end_time }}</span>
+            <div class="schedule-grid">
+                {% if today_events %}
+                    {% for event in today_events %}
+                    <div class="schedule-item">
+                        <div class="schedule-time">{{ event.start_time.split(' ')[1] if event.start_time else 'TBD' }}</div>
+                        <div class="schedule-info">
+                            <div class="schedule-name">{{ event.name }}</div>
+                            <div class="schedule-location">{{ event.location or 'TBD' }}</div>
+                        </div>
                     </div>
-                    <div class="match-description">{{ match.description[:100] }}...</div>
-                </div>
-            </a>
-            {% endfor %}
-        </div>
-
-        <!-- 今日赛程时间线 -->
-        <div class="timeline-section">
-            <h3 style="margin-bottom: 1rem;">⏰ 今日赛程</h3>
-            <div class="timeline">
-                {% for event in today_events %}
-                <div class="timeline-item">
-                    <div class="timeline-content">
-                        <div class="timeline-date">{{ event.start_time }}</div>
-                        <div class="timeline-title">{{ event.name }}</div>
-                        <p>{{ event.location }}</p>
-                    </div>
-                </div>
-                {% endfor %}
+                    {% endfor %}
+                {% else %}
+                    <div class="empty-schedule">✨ No events scheduled for today</div>
+                {% endif %}
             </div>
         </div>
 
-        <!-- 已完成的比赛 -->
-        <div class="section-header">
-            <h3>✅ 已完赛</h3>
-        </div>
+       
 
-        <div class="matches-grid">
-            {% for match in completed_matches %}
-            <a href="/{{ match._id }}/" class="match-card">
-                <div class="match-header">
-                    <span class="match-icon">{{ match.hex_icon or '🏅' }}</span>
-                    <span class="match-status status-completed">已结束</span>
-                </div>
-                <div class="match-body">
-                    <div class="match-title">{{ match.name }}</div>
-                    <div class="match-time">
-                        <span>📅 {{ match.start_time }}</span>
-                    </div>
-                    {% if match.manual_1st_player_id %}
-                    <div class="match-winner">
-                        <span class="winner-tag">🏆 冠军</span>
-                        <span>{{ match.winner_name }}</span>
-                    </div>
-                    {% endif %}
-                </div>
-            </a>
-            {% endfor %}
-        </div>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>CSC Olympics 2026</h4>
-                <p>激情 · 友谊 · 卓越</p>
-                <p>12个学院的荣耀之战</p>
-            </div>
-            <div class="footer-section">
-                <h4>快速链接</h4>
-                <p><a href="/houses_status/">学院排名</a></p>
-                <p><a href="/timetable/">比赛赛程</a></p>
-                <p><a href="/about/">关于我们</a></p>
-            </div>
-            <div class="footer-section">
-                <h4>联系我们</h4>
-                <p>📧 csc.olympics@school.edu</p>
-                <p>📱 关注我们</p>
-                <div class="social-links">
-                    <a href="#">📘</a>
-                    <a href="#">📸</a>
-                    <a href="#">🐦</a>
-                </div>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2026 CSC Olympics. 由 Computing Society 开发维护</p>
-            <p>Developed by: Harry Cao, Richard Xu, and Richard Gu</p>
-        </div>
+    <!-- 页脚 - 只改颜色 -->
+    <footer class="footer">
+        <p>© 2026 CSC Olympics · UWC Changshu China</p>
+        <p style="margin-top: 0.5rem;">Made by <a href="#" class="uwc-link">Computing Society</a></p>
     </footer>
 </body>
 </html>

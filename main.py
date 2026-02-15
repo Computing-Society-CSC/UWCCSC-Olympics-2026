@@ -90,45 +90,44 @@ def calculate_points(category, position, house_id):
 
 # ============= 公开路由 =============
 @app.route('/')
-@app.route('/home/')
+@app.route('/home')
 def home():
-    # 获取所有学院排名
+    # 获取所有学院，按积分排序
     houses = list(houses_collection.find().sort('points', -1))
-    house_rankings = []
-    color_map = {}
-    for idx, house in enumerate(houses):
-        house_rankings.append({
+    
+    # 前三名学院
+    top_3_houses = []
+    for idx, house in enumerate(houses[:3]):
+        top_3_houses.append({
             'rank': idx + 1,
             'name': house['name'],
-            'points': house['points']
+            'points': house['points'],
+            'color_name': house.get('color_name', 'House')
         })
-        color_map[house['name']] = house['color']
     
-    # 获取所有比赛
-    all_matches = list(events_collection.find())
+    # 获取当天日期 (模拟，实际用datetime)
+    from datetime import datetime
+    today = datetime.now().strftime('%Y-%m-%d')
+    today_display = datetime.now().strftime('%A, %B %d')
     
-    # 为每个比赛添加胜者名称
-    for match in all_matches:
-        if match.get('manual_1st_player_id'):
-            winner = players_collection.find_one({'_id': match['manual_1st_player_id']})
-            match['winner_name'] = winner['name'] if winner else None
+    # 获取当天赛事
+    today_events = list(events_collection.find({
+        'start_time': {'$regex': f'^{today}'}
+    }).sort('start_time', 1))
     
-    # 分类比赛
-    ongoing_matches = [m for m in all_matches if m.get('status') == 1]
-    upcoming_matches = [m for m in all_matches if m.get('status') == 0]
-    completed_matches = [m for m in all_matches if m.get('status') == 2]
-    
-    # 今日比赛（假设今天日期是2026-03-15）
-    today = "2026-03-15"
-    today_events = [m for m in all_matches if today in m.get('start_time', '')]
+    # 统计数据
+    total_matches = events_collection.count_documents({})
+    ongoing_matches = events_collection.count_documents({'status': 1})
+    completed_events = events_collection.count_documents({'status': 2})
     
     return render_template('home.html',
-                         house_rankings=house_rankings,
-                         color_map=color_map,
-                         ongoing_matches=ongoing_matches[:6],  # 只显示前6个
-                         upcoming_matches=upcoming_matches[:6],
-                         completed_matches=completed_matches[:6],
-                         today_events=today_events[:5])
+                         top_3_houses=top_3_houses,
+                         today_date=today_display,
+                         today_events=today_events,
+                         total_matches=total_matches,
+                         ongoing_matches=ongoing_matches,
+                         completed_events=completed_events)
+
 
 @app.route('/about/')
 def about():
